@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: "Arial", sans-serif;
+    font-weight: 400;
+}
+
+h1,
+header {
+    /* font-family: "Rubik Puddles", system-ui; */
+    font-family: "Arial", system-ui;
+    font-size: 4rem;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 0rem;
+    color: #4f46e5;
+}
+
+.card h2 {
+    margin-top: 0.25rem;
+    margin-bottom: 0rem;
+}
+
+body {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 16px;
+    background-color: #f8ecff;
+    /* background-image: url("/static/graph-paper.png"); */
+    /* background-repeat: repeat; */
+}
+
+nav a {
+    font-family: "Arial", system-ui;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 12px;
+    text-decoration: none;
+    color: #e46cff;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+input[type="range"] {
+    accent-color: #4f46e5;
+    /* change to any color you want */
+}
+
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 14px;
+    background-color: #4f46e5;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4338ca;
+    /* slightly darker */
+}
+
+
+input[type="range"] {
+    margin-top: 10px;
+}
+
+.small {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.flash {
+    background: #e9f7ef;
+    border: 1px solid #b7e1c2;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.metric {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.metric .label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.metric .value {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 6px;
+}

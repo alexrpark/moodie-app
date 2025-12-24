@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Trends 📈</h2>
+
+{% if not found %}
+<p>No data yet. Log your first entry.</p>
+{% else %}
+<p class="small">Total entries: {{ total_entries }}</p>
+<div class="metrics">
+  <div class="metric">
+    <div class="label">Avg mood (all time)</div>
+    <div class="value">{{ avg_all }}</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Avg mood (last 7 days)</div>
+    <div class="value">{{ avg_7d }}</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">High day (last 7 days)</div>
+    <div class="value">{{ high_7d }}</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Low day (last 7 days)</div>
+    <div class="value">{{ low_7d }}</div>
+  </div>
+</div>
+
+{% if volatility_msg %}
+<p class="small" style="margin-top: 16px;">
+  {{ volatility_msg }}
+</p>
+{% endif %}
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>How are you feeling, Alex?</h2>
+<p class="small">Your daily check-in</p>
+
+<form method="POST" action="{{ url_for('log') }}">
+  <label for="mood">Mood (0–5)</label>
+  <input id="mood" name="mood" type="range" min="0" max="5" step="1" value="0"
+    oninput="moodValue.textContent = this.value" />
+  <div class="small">Mood: <span id="moodValue">0</span></div>
+
+  <label for="note">Note (optional)</label>
+  <textarea id="note" name="note" rows="2" placeholder="What’s going on?"></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}
