@@ -34,5 +34,94 @@
 </p>
 {% endif %}
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script id="chart-labels" type="application/json">
+    {{ chart_labels | tojson }}
+  </script>
+<script id="chart-values" type="application/json">
+    {{ chart_values | tojson }}
+  </script>
+
+<div style="margin-top: 16px;">
+  <canvas id="moodChart"></canvas>
+</div>
+
+<script>
+  const labels = JSON.parse(
+    document.getElementById("chart-labels").textContent
+  );
+  const values = JSON.parse(
+    document.getElementById("chart-values").textContent
+  );
+
+  const weekday = (isoDateStr) => {
+    // isoDateStr like "2025-12-25"
+    const d = new Date(isoDateStr + "T00:00:00");
+    return d.toLocaleDateString(undefined, { weekday: "short" }); // Mon, Tue, Wed...
+  };
+
+  new Chart(document.getElementById("moodChart"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: values,
+          tension: 0.25,
+          borderColor: "#4f46e5",      // line color (indigo)
+          backgroundColor: "#4f46e5",  // point fill color
+          pointRadius: 3,
+          pointHoverRadius: 5,
+        }
+      ]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+
+        title: {
+          display: true,
+          text: "Mood over the last 7 days",
+          color: "#000",
+          font: {
+            size: 16,
+            weight: "600"
+          },
+          padding: {
+            top: 8,
+            bottom: 12
+          }
+        },
+
+        tooltip: {
+          callbacks: {
+            title: (items) => weekday(items[0].label)
+          }
+        }
+      },
+
+      scales: {
+        x: {
+          ticks: {
+            callback: function (value) {
+              const label = this.getLabelForValue(value);
+              return weekday(label);
+            }
+          }
+        },
+        y: {
+          min: 0,
+          max: 5,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      }
+    }
+  });
+
+</script>
+
 {% endif %}
 {% endblock %}

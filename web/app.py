@@ -78,6 +78,8 @@ def trends():
     daily = df.groupby("date", as_index=False).agg(avg_mood=("mood", "mean"))
     last_7 = daily.tail(7)
     prev_7 = daily.iloc[-14:-7]
+    chart_labels = [str(d) for d in last_7["date"].tolist()]
+    chart_values = [round(float(x), 2) for x in last_7["avg_mood"].tolist()]
 
     avg_all = float(df["mood"].mean())
     avg_7d = float(last_7["avg_mood"].mean())
@@ -107,6 +109,8 @@ def trends():
         high_7d=f"{high_7d:.2f}",
         low_7d=f"{low_7d:.2f}",
         volatility_msg=volatility_msg,
+        chart_labels=chart_labels,
+        chart_values=chart_values,
     )
 
 

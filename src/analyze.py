@@ -1,10 +1,8 @@
 from __future__ import annotations
-
 from pathlib import Path
 from collections import Counter
 import argparse
 import re
-
 import pandas as pd
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "mood_log.csv"
