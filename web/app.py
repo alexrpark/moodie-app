@@ -38,6 +38,7 @@ def log():
     if request.method == "POST":
         mood_raw = request.form.get("mood", "").strip()
         note = (request.form.get("note") or "").strip()
+        ts_raw = (request.form.get("timestamp") or "").strip()
 
         try:
             mood = int(mood_raw)
@@ -48,9 +49,18 @@ def log():
         if not (0 <= mood <= 5):
             flash("Mood must be between 0 and 5.")
             return redirect(url_for("log"))
+        
+        if ts_raw:
+            try:
+                ts = datetime.fromisoformat(ts_raw)
+            except ValueError:
+                flash("Invalid timestamp format.")
+                return redirect(url_for("log"))
+        else:
+            ts = datetime.now()
 
         row = {
-            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "timestamp": ts.isoformat(timespec="seconds"),
             "mood": mood,
             "note": note,
             "sentiment": sentiment_compound(note),
@@ -59,7 +69,8 @@ def log():
         flash("Saved!")
         return redirect(url_for("log"))
 
-    return render_template("log.html", title="Log")
+    default_ts = datetime.now().strftime("%Y-%m-%dT%H:%M")
+    return render_template("log.html", title="Log", default_ts=default_ts)
 
 
 @app.get("/trends")

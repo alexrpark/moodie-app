@@ -4,6 +4,11 @@
 <p class="small">Your daily check-in</p>
 
 <form method="POST" action="{{ url_for('log') }}">
+  <div>
+    <label for="timestamp">Time</label>
+    <input id="timestamp" name="timestamp" type="datetime-local" value="{{ default_ts }}" required />
+  </div>
+
   <label for="mood">Mood (0–5)</label>
   <input id="mood" name="mood" type="range" min="0" max="5" step="1" value="0"
     oninput="moodValue.textContent = this.value" />
